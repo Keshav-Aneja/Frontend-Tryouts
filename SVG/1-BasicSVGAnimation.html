@@ -1,0 +1,46 @@
+<!-- ARTICLE LINK : https://css-tricks.com/svg-line-animation-works/ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .svg-path {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        animation: dash 5s linear forwards;
+      }
+      /* stroke-dasharray bas dashes banata hai ek fixed pixel length ke */
+      /* stroke-dashoffset unko aage karta hai utni length se */
+
+      /* yaha pe path ki length 1000 this, to ek 1000 length ka dash bana joki poore svg ko cover karega, ab offset us dash ko utni length se aage le jaaata hai, to 1000 length ke dash ko jab mai 1000 aage le jau to wo gayab ho jayeba, and animate karte time usko mai offset 0 pe le aye to wapis dikhne lagega */
+
+      /* Most of the examples you see of SVG line animations use JavaScript. That’s because it’s hard to know what the length of that stroke actually is. We just used 1000 in our example because that happens to be about the right length.
+
+You can get that length in JavaScript like:
+
+var path = document.querySelector('.path');
+var length = path.getTotalLength(); */
+      @keyframes dash {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <svg viewBox="0 0 1000 333">
+      <!-- The path must have a stroke and stroke-width -->
+      <path
+        class="svg-path"
+        fill="white"
+        stroke="black"
+        stroke-width="4"
+        d="M66.039,133.545c0,0-21-57,18-67s49-4,65,8
+          s30,41,53,27s66,4,58,32s-5,44,18,57s22,46,0,45s-54-40-68-16s-40,88-83,48s11-61-11-80s-79-7-70-41
+          C46.039,146.545,53.039,128.545,66.039,133.545z"
+      />
+    </svg>
+  </body>
+</html>
