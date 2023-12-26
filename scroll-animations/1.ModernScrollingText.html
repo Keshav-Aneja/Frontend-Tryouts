@@ -1,0 +1,84 @@
+<!-- https://www.youtube.com/watch?v=VeTwNnZUPlw&ab_channel=DesignCourse -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="1.ModernScrollingText.css" />
+  </head>
+  <body>
+    <section>
+      <h1>Scroll Down For Awesomeness</h1>
+    </section>
+    <section>
+      <p class="reveal-type">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed, ullam!
+      </p>
+    </section>
+    <section>
+      <p class="reveal-type">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, saepe?
+      </p>
+    </section>
+    <section>
+      <p class="reveal-type">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur,
+        animi.
+      </p>
+    </section>
+    <section></section>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
+      integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"
+      integrity="sha512-OzC82YiH3UmMMs6Ydd9f2i7mS+UFL5f977iIoJ6oy07AJT+ePds9QOEtqXztSH29Nzua59fYS36knmMcv79GOg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+      const splitTypes = document.querySelectorAll(".reveal-type");
+      splitTypes.forEach((char, i) => {
+        const text = new SplitType(char, { types: "chars" }); //We can use words also here to seperate using words, or do both, seperate words and for each word seperate characters "chars,words"
+        gsap.from(text.chars, {
+          scrollTrigger: {
+            trigger: char,
+            //pin:true, if you add pin to true then it will stay fixed on the screen till the end
+            start: "top 80%", //top 80% means that the top of the "char" is at 80% of the screen, then trigger the animation
+            end: "top 20%", //end the animation when the top is at 20% of the screen
+            scrub: true, //scrub : true, makes them tie to scroll position not to time, you can add values to the scrub like 1,2,3,5... to make it more slower and smoother
+            markers: false,
+          },
+          //Ex1
+          //   y: 50,
+          //   opacity: 0,
+          //Ex2
+          //   scaleY: 0,
+          //   y: -20,
+          //   transformOrigin: "top",
+          opacity: 0.2,
+          stagger: 0.1,
+        });
+      });
+      const lenis = new Lenis();
+
+      lenis.on("scroll", (e) => {
+        console.log(e);
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
+      requestAnimationFrame(raf);
+    </script>
+  </body>
+</html>

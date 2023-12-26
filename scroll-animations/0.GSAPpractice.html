@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      section {
+        height: 100vh;
+        display: grid;
+        place-content: center;
+        font-family: "Poppins";
+        position: relative;
+      }
+      p {
+        font-size: 5rem;
+      }
+      section:nth-of-type(2) {
+        background-color: #292929;
+        color: white;
+      }
+      .box {
+        background-color: aquamarine;
+        width: 200px;
+        aspect-ratio: 1;
+        position: absolute;
+        top: 50%;
+        left: 0px;
+        transform: translateY(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    <section></section>
+    <section>
+      <div class="box"></div>
+      <p>Hello</p>
+    </section>
+    <section>
+      <p>Hi</p>
+    </section>
+    <section>
+      <p>Bye</p>
+    </section>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
+      integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"
+      integrity="sha512-OzC82YiH3UmMMs6Ydd9f2i7mS+UFL5f977iIoJ6oy07AJT+ePds9QOEtqXztSH29Nzua59fYS36knmMcv79GOg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      const box = document.querySelector(".box");
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.to(box, {
+        scrollTrigger: {
+          trigger: box,
+          pin: true, //for pin also we don't need to necessarily pass true, we can pass elements also to pin like ".box", or any other dom element
+          start: "top center",
+          end: "top -50%",
+          markers: false,
+          ToggleEvent: "play none reverse restart",
+        },
+        x: 300,
+      });
+    </script>
+  </body>
+</html>
